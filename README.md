@@ -1,2 +1,2 @@
-# 4-1_Competitive_Programming_and_Practice
+# [4-1] 고급문제해결기법
 HUFS
