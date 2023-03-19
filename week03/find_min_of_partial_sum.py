@@ -54,27 +54,29 @@ def find_min(start, end, cur, r1, r2):
 	right = find_min(mid + 1, end, cur * 2 + 1, r1, r2)
 	return min(left, right)
 
+def get_ans():
+	ans = []
+	left, right = 0, k-1
+	ans.append(find_min(0, n-1, 1, 0, k-1))
+	for i in range(n - k):
+		left += 1
+		right += 1
+		if nums[left - 1] == ans[-1] or nums[right] < ans[-1]:
+			if nums[left - 1] < nums[right]:
+				ans.append(find_min(0, n-1, 1, left, right))
+			else:
+				ans.append(nums[right])
+		else:
+			ans.append(ans[-1])
+	return ans
+
 if __name__ == '__main__':
 	n, k = map(int, input().split())
 	nums = list(map(int, input().split()))
 	tree = [0] * (pow(2, ceil(log2(n) + 1)) - 1)
-	ans = []
 	init_tree(0, n-1, 1)
-	ans.append(find_min(0, n-1, 1, 0, k-1))
-	left, right = 0, k-1
-	for i in range(n - k):
-		left += 1
-		if nums[left - 1] == ans[-1] or nums[right + 1] < ans[-1]:
-			if nums[left - 1] < nums[right]:
-				ans.append(find_min(0, n-1, 1, left, right + 1))
-				print(1)
-			else:
-				print(2)
-				ans.append(nums[right + 1])
-			print(ans)
-		else:
-			ans.append(ans[-1])
-		right += 1
+	ans = get_ans()
+	
 	for v in ans:
 		print(v, end=' ')
 '''
@@ -88,16 +90,25 @@ if __name__ == '__main__':
 리프노드에는 입력받은 배열을 차례대로 넣고(start == end인 경우)
 부모노드에는 자식 노드 중 작은 값을 넣는다
 
-이후 find_min()을 통해 최소값을 구한다.
-만약 start와 end의 값이 구간 내에 존재하면 현재 노드를,
+find_min()은 구간의 최소값을 찾는 함수이다.
+만약 start와 end가 주어진 범위 내에 있으면 현재 노드를 반환하고
 그렇지 않으면 sys.maxsize를 반환한다.
 재귀가 모두 끝난 후 반환되는 노드가 구간의 최소값이 된다.
 
-이 때, 입력받은 배열의 왼쪽에서부터 오른쪽으로 이동하면서 길이가 k인 부분 배열을 확인해야 하므로, 
-0부터 n - k + 1까지 반복문을 돌며 모든 구간의 최소값을 구한다.
+get_ans()는 구간의 최소값 배열을 반환한다.
+우선 find_min()으로 가장 첫 구간의 최소값만 구한 후,
+두 개의 포인터를 이용해 나머지 구간의 최소값을 구한다.
+left와 right는 구간의 가장 첫 노드와 마지막 노드를 가리킨다.
+find_min()을 통해 첫 구간의 최소값만을 구한 후
+left와 right를 오른쪽으로 한 칸씩 움직이면서 다음 구간의 최소값을 구한다.
+만약 left-1(구간을 벗어난 수)이 최소값이거나
+right(구간에 들어온 수)가 최소값보다 작다면 두 수의 크기를 비교하여 맞는 연산을 수행한다.
+만약 left-1이 더 작은 경우 find_min()을 통해 구간의 최소값을 구한다.
+right가 더 작은 경우에는 필연적으로 right가 최소값이 되므로
+right의 값을 ans에 append()한다.
 
-수행시간: O(nlogn)
+수행시간: O(n)
 세그먼트 트리는 이진 트리이므로 초기화하고 검색을 하는데 O(logn)시간이 걸린다.
-검색을 총 n-k+1번 반복하므로 O((logn) * (n - k + 1))시간,
-즉, 전체 코드의 시간복잡도는 O(nlogn)이다.
+검색을 총 한 번 진행한 후, nums 배열을 한 번 n - k번 탐색하므로
+전체 코드의 시간복잡도는 O(logn + n)시간, 즉, O(logn)이다.
 '''
