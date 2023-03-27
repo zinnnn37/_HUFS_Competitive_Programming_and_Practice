@@ -28,26 +28,17 @@ import sys
 sys.setrecursionlimit(10 ** 8)
 input = lambda: sys.stdin.readline().rstrip()
 
-def	search_binary(arr, start, end):
-	if start > end:
-		return -1
-	mid = (start + end) // 2
-	if arr[mid] == K:
-		return mid
-	elif arr[mid] > K:
-		return search_binary(arr, start, mid-1)
-	else:
-		return search_binary(arr, mid+1, end)
-
 def search_matrix():
 	for i in range(n):
 		if arr[i][0] > K:
+		# 처음 값이 K보다 큰 경우
 			break
 		if arr[i][-1] < K:
+		# 마지막 값이 K보다 작은 경우
 			continue
-		j = search_binary(arr[i], 0, n-1)
-		if j != -1:
-			return i, j
+		for j in range(n):
+			if arr[i][j] == K:
+				return i, j
 	return [-1]
 
 if __name__ == '__main__':
@@ -55,3 +46,20 @@ if __name__ == '__main__':
 	arr = [list(map(int, input().split())) for _ in range(n)]
 	for n in search_matrix():
 		print(n, end=' ')
+
+'''
+알고리즘:
+	정렬된 2차원 배열을 탐색하므로
+	각 행의 첫 번째 값이 K보다 크거나 마지막 값이 K보다 작으면
+	해당 행에는 K가 존재할 수 없다.
+	특히 첫 번째 값이 K보다 큰 경우, 정렬된 2차원 배열이므로
+	해당 행 다음 행부터는 K가 존재할 가능성이 없으므로 반복문을 종료한다.
+	마지막 값이 K보다 작은 경우는 다음 행에 K가 나올 가능성이 있으므로
+	continue를 통해 다음 반복을 시행한다.
+	위 조건에 부합하지 않는 경우, 행 내에 K가 존재할 가능성이 있으므로
+	행의 첫 번째부터 순차탐색하고 K의 좌표를 반환한다.
+	반복문을 모두 시행했음에도 K를 찾지 못한 경우 -1을 반환한다.
+
+수행시간:
+	행과 열을 모두 순차탐색하므로 수행시간은 O(n^2)이다.
+'''
