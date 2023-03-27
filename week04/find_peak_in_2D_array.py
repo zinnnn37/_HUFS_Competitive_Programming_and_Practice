@@ -22,19 +22,20 @@ def find_peak(col, start, end):
 		return find_peak(col, mid + 1, end)
 
 def find_peak_in_2D_array(srow, erow):
-	if (srow == erow):
-		return srow
 	mrow = (srow + erow) // 2
 	col = find_peak(mrow, 0, m-1)	# mid 행의 봉우리
-
-	left = mrow - 1 >= srow and arr[col][mrow-1] > arr[col][mrow]
-	right = mrow + 1 <= erow and arr[col][mrow+1] > arr[col][mrow]
+	if (srow == erow):
+		return [srow, col]
+	print(mrow, col)
+	up = mrow - 1 >= srow and arr[mrow-1][col] >= arr[mrow][col]
+	down = mrow + 1 <= erow and arr[mrow+1][col] >= arr[mrow][col]
 	# 범위 내에 있는 경우 봉우리가 아니어도 True가 나옴
 	# -> 봉우리일 때 False로 만들기
+	# 양 옆에 있는 숫자가 현 인덱스의 숫자보다 작을 때(봉우리가 성립)
 
-	if not left and not right:
-		return [col, mrow]
-	elif right: # 오른쪽이 낮을 때
+	if not up and not down:
+		return [mrow, col]
+	elif down: # 아래가 높을 때 -> 현재 인덱스의 오른쪽을 배열 끝으로 지정
 		return find_peak_in_2D_array(mrow + 1, erow)
 	else:
 		return find_peak_in_2D_array(srow, mrow - 1)
@@ -44,3 +45,7 @@ if __name__ == '__main__':
 	n, m = map(int, input().split())
 	arr = [list(map(int, input().split())) for _ in range(n)]
 	print(find_peak_in_2D_array(0, n-1))
+
+'''
+서로 다른 양의 정수
+'''
