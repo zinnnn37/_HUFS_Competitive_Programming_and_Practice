@@ -1,5 +1,4 @@
 import math
-import random
 
 def isSafe(h):
     if h < answer :
@@ -21,6 +20,5 @@ def twoEggsDrop(n):
     return cnt
 
 n = int(input())
-answer = random.randint(1, n)
 answer = 24
 print(answer, twoEggsDrop(n))
