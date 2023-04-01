@@ -24,8 +24,6 @@ def find_peak(col, start, end):
 def find_peak_in_2D_array(srow, erow):
 	mrow = (srow + erow) // 2
 	col = find_peak(mrow, 0, m-1)	# mid 행의 봉우리
-	if (srow == erow):
-		return [srow, col]
 	print(mrow, col)
 	up = mrow - 1 >= srow and arr[mrow-1][col] >= arr[mrow][col]
 	down = mrow + 1 <= erow and arr[mrow+1][col] >= arr[mrow][col]
@@ -40,7 +38,7 @@ def find_peak_in_2D_array(srow, erow):
 	else:
 		return find_peak_in_2D_array(srow, mrow - 1)
 
- 
+
 if __name__ == '__main__':
 	n, m = map(int, input().split())
 	arr = [list(map(int, input().split())) for _ in range(n)]
@@ -48,4 +46,5 @@ if __name__ == '__main__':
 
 '''
 서로 다른 양의 정수
+봉우리가 벽쪽에 있을 때 성립 불가능
 '''
