@@ -41,6 +41,7 @@ int	main(void)
 
 	scanf("%d %d", &E, &F);
 	printf("%d\n", drop_eggs(E, F));
+	return 0;
 }
 
 /*
