@@ -4,6 +4,7 @@ input = lambda: sys.stdin.readline().rstrip()
 def init():
 	for i in range(E+1):
 		DP[E][1] = 1
+		DP[E][0] = 0
 	for j in range(F+1):
 		DP[1][j] = j
 
