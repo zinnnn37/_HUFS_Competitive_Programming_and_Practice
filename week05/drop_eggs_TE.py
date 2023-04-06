@@ -10,6 +10,8 @@ def drop_eggs(e, f):
 		# 점화식으로 배열 채우기
 		for i in range(1, e + 1):
 			dp[cnt][i] = dp[cnt - 1][i - 1] + dp[cnt - 1][i] + 1
+		for d in dp:
+			print(d)
 	return cnt
 
 
@@ -18,6 +20,8 @@ if __name__ == '__main__':
 	# dp 배열 초기화
 	dp = [[0 for _ in range(E + 1)] for __ in range(F + 1)]
 	print(drop_eggs(E, F))
+	for d in dp:
+		print(d)
 
 '''
 알고리즘:

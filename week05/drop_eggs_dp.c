@@ -16,7 +16,7 @@ int drop_eggs(int e, int f)
 		matrix[i][1] = 1;
 	for (int j = 1; j <= f; j++)
 		matrix[1][j] = j;
- 
+
 	for (int i = 2; i <= e; i++)
 	{
 		for (int j = 2; j <= f; j++)
