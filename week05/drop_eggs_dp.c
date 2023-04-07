@@ -9,7 +9,8 @@ int	max(int x, int y)
 int drop_eggs(int e, int f)
 {
 	int matrix[e + 1][f + 1];
-	int res;
+	int res, x = 0;
+	// x로 .. O(EF)시간 안에 풀 수 있다는데
 
 	// 초기값 설정
 	for (int i = 1; i <= e; i++)
