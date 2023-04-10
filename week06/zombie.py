@@ -42,7 +42,7 @@ def drop_zombie():
 		# 양수: 오른쪽 이동 -> L-idx로 저장
 	sorted_lst.sort()	# 빨리 떨어지는 순으로 정렬
 
-	i = 0
+	i = 0	# 좀비 수 카운트
 	while zombie:
 		# 떨어지는 시간이 같음
 		if i != n-1 and sorted_lst[i][0] == sorted_lst[i+1][0]:
