@@ -35,7 +35,7 @@ def drop_zombie():
 	ans = []
 	
 	for _ in range(n):
-		loc, i = map(float, input().split())
+		loc, i = map(int, input().split())
 		zombie.append(i)	# 좀비 순서 저장용
 		sorted_lst.append([loc, i] if i < 0 else [L-loc, i])
 		# 음수: 왼쪽 이동 -> 그냥 저장
@@ -64,7 +64,7 @@ def drop_zombie():
 			else:
 				ans.append(zombie.pop())
 			i += 1
-	print(int(ans[k-1]))
+	print(ans[k-1])
 
 if __name__ == '__main__':
 	n, L, k = map(int, input().split())
