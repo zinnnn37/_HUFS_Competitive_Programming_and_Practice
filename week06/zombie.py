@@ -44,7 +44,7 @@ def drop_zombie():
 
 	i = 0	# 좀비 수 카운트
 	while zombie:
-		# 떨어지는 시간이 같음
+		# 마지막 좀비가 아니고(남은 좀비가 한 마리가 아니고) 떨어지는 시간이 같음
 		if i != n-1 and sorted_lst[i][0] == sorted_lst[i+1][0]:
 			# 왼쪽 좀비 id가 더 작은 경우 왼쪽부터 떨어트린다
 			if zombie[0] < zombie[-1]:
