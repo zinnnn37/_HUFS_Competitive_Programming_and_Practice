@@ -12,11 +12,12 @@ def almost_palindrome():
 				dp[i][j] = dp[i+1][j-1] + 2
 			else:
 				dp[i][j] = max(dp[i+1][j], dp[i][j-1])
-		for d in dp:
-			print(d)
-		print()
+		#for d in dp:
+		#	print(d)
+		#print()
 	
 	res = n - dp[0][n-1]
+	print(n, dp[0][n-1])
 	return res if res <= 3 else -1
 
 if __name__ == '__main__':
@@ -27,7 +28,7 @@ if __name__ == '__main__':
 
 '''
 알고리즘:
-	dp[i][j]: s[i] ~ s[j]까지의 부분 문자열 중 가장 긴 회문의 길이
+	dp[i][j]: s[i] ~ s[j]까지의 부분 문자열 중 가장 적은 문자를 제거하여 회문을 만들 수 있는 문자의 개수
 	1. s[i] == s[j]인 경우: dp[i][j] = dp[i+1][j-1] + 2
 		(dp[i+1][j-1]의 양 끝이 s[i], s[j]이고 두 문자는 같으므로)
 	2. s[i] != s[j]인 경우: dp[i][j] = max(dp[i+1][j], dp[i][j-1])
