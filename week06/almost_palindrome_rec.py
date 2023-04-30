@@ -1,6 +1,6 @@
 import sys
 input = lambda: sys.stdin.readline().rstrip()
-sys.setrecursionlimit(10**8)	# 이거 때문에 마지막 세 문제 error
+sys.setrecursionlimit(10**8)
 
 def almost_palindrome(start, end, cnt):
 	if cnt > 3:
@@ -39,6 +39,6 @@ if __name__ == '__main__':
 	각각 -1과 cnt를 반환한다.
 
 수행시간:
-	재귀함수를 이용하는데, cnt가 3보다 큰 경우 재귀가 종료되므로 최대 깊이는 3이다.
-	따라서 시간복잡도는 O(n)이다.
+	없앨 수 있는 문자는 최대 3개이므로 재귀 분기는 최대 8번까지 생긴다.
+	따라서 평균적인 시간복잡도는 O(n)이다.
 '''

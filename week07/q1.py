@@ -30,6 +30,8 @@ A = reconstruct(S, L)
 print(A)
 
 # 1. 본인이 작성한 알고리즘의 수행시간을 간략히 분석해보자
+# reconstruct() 함수 내에서 반복문을 한 번 돌면서
+# 리스트 A에 값을 append하므로 O(n)이다.
 # 
 # 2. 수행시간 T(n)을 Big-O료 표기해보자
-# 
+# O(n)
