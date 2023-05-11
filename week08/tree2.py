@@ -1,5 +1,4 @@
 from collections import deque
-import copy
 import sys
 input = lambda: sys.stdin.readline().rstrip()
 sys.setrecursionlimit(10**8)
@@ -40,7 +39,6 @@ if __name__ == '__main__':
 	tree = [[] for _ in range(n + 1)]
 	rev = [[] for _ in range(n + 1)]
 	w = [0] + list(map(int, input().split()))
-	weight = copy.deepcopy(w)
 
 	for _ in range(n-1):
 		p, c = map(int, input().split())
