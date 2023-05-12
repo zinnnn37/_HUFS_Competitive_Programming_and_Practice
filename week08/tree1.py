@@ -1,5 +1,6 @@
 from collections import deque
 import sys
+sys.setrecursionlimit(10**8)
 input = lambda: sys.stdin.readline().rstrip()
 
 def _preorder(q, visited):
