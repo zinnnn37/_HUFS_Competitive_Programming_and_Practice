@@ -6,7 +6,7 @@ sys.setrecursionlimit(10**8)
 def _sum(q, res):
 	while q:
 		cur = q.popleft()
-		for parent in rev[cur]:
+		for parent in parents[cur]:
 			q.append(parent)
 			res += w[parent]
 			res = _sum(q, res)
@@ -25,14 +25,12 @@ def update(v, diff):
 
 if __name__ == '__main__':
 	n, q = map(int, input().split())
-	tree = [[] for _ in range(n + 1)]
-	rev = [[] for _ in range(n + 1)]
+	parents = [[] for _ in range(n + 1)]
 	w = [0] + list(map(int, input().split()))
 
 	for _ in range(n-1):
 		p, c = map(int, input().split())
-		tree[p].append(c)
-		rev[c].append(p)
+		parents[c].append(p)
 
 	for _ in range(q):
 		cmd, *v = input().split()
