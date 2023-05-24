@@ -27,3 +27,10 @@ if __name__ == "__main__":
             print(query_subtree(v[0]))
         elif cmd == 'update':
             query_update(v[0], v[1])
+            
+'''
+수행시간:
+	query_subtree() 함수에서 자식 노드를 한 번씩 방문하므로 O(n)시간이 소요되고
+	query_update() 함수에서 인덱스를 통해 가중치 배열을 업데이트하므로 O(1)시간이 소요된다.
+	따라서 총 수행시간은 O(n)이다.
+'''

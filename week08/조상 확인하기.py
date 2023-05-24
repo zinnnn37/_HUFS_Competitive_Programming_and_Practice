@@ -42,3 +42,10 @@ if __name__ == "__main__":
 		if (query_ancestor(a, b)):
 			cnt += 1
 	print(cnt)
+
+'''
+수행시간:
+	dfs() 함수에서 자식 노드를 한 번씩 방문하므로 O(n)시간이 소요되고
+	query_ancestor() 함수에서 index() 함수를 사용하므로 O(n)시간이 소요된다.
+	따라서 총 수행시간은 O(2n) = O(n)이다.
+'''
