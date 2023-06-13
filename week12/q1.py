@@ -1,45 +1,52 @@
-from copy import deepcopy
-from collections import deque
 import sys
 input = lambda: sys.stdin.readline().rstrip()
 
-def _topology_sort(i):
-	res = []
-	q = deque()
-	q.append(i)
-	copied = deepcopy(indegree)
+def cycle(node):
+	global c
 
-	while q:
-		print(q)
-		cur = q.popleft()
-		res.append(cur)
+	if node == c:
+		return
+	dp[node] = dp[c]
+	cycle(island[node])
 
-		for i in island[cur]:
-			copied[i] -= 1
-		
-			if copied[i] == 0:
-				q.append(i)
-	
-	return len(res)
+def dfs(node):
+	global c
 
-def topology_sort(m, n):
-	reslen = 0
+	if dp[node] != 0:
+		return dp[node]
 
-	for i in range(n):
-		if indegree[i] == 0:
-			reslen = max(reslen, _topology_sort(i))
+	cur = 0
+	if island[node] != -1 and not visited[island[node]]:
+		visited[island[node]] = True
+		cur = dfs(island[node])
+	elif island[node] != -1 and dp[island[node]] == 0:
+		c = island[node]
+	elif island[node] != -1:
+		cur = dfs(island[node])
 
-	print(reslen)
+	dp[node] = cur + 1
+	if node == c:
+		cycle(island[c])
+		c = -1
 
-if __name__ == "__main__":
+	return dp[node]
+
+if __name__ == '__main__':
 	m, n = map(int, input().split())
-	island = [[] for _ in range(n)]
-	indegree = [0] * (n)
-	for _ in range(m):
-		a, b = map(int, input().split())
-		island[a].append(b)
-		indegree[b] += 1
-			
-	print(indegree)
 
-	topology_sort(m, n)
+	dp = [0] * (n+1)
+	visited = [False] * (n+1)
+	island = [-1] * (n+1)
+
+	for _ in range(m):
+		u, v = map(int, input().split())
+		island[u] = v
+
+	res = 0
+	c = -1
+	for i in range(n):
+		if not visited[i]:
+			visited[i] = True
+		res = max(res, dfs(i))
+	
+	print(res)
