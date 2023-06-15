@@ -37,31 +37,31 @@ import sys
 
 class Stack:
 	def __init__(self):
-		self.s1 = []	# 일반 스택
-		self.s2 = []	# 최대값을 저장하는 스택
+		self.stack = []	# 일반 스택
+		self.maximum = []	# 최대값을 저장하는 스택
 
 	def push(self, x):
-		self.s1.append(x)
-		if len(self.s2) == 0 or self.s2[-1] <= x:
+		self.stack.append(x)
+		if len(self.maximum) == 0 or self.maximum[-1] <= x:
 		# 최대값을 저장하는 스택이 비어있거나, top이 x보다 작거나 같다면(x가 최대값이라면) append()
-			self.s2.append(x)
+			self.maximum.append(x)
 
 	def pop(self):
-		if len(self.s1) == 0:
+		if len(self.stack) == 0:
 			print('EMPTY')
 		else:
-			if self.s1[-1] == self.s2[-1]:
+			if self.stack[-1] == self.maximum[-1]:
 			# pop() 하려는 요소가 최대값인 경우 최대값을 저장하는 스택도 함께 pop()
-				self.s2.pop()
-			print(self.s1[-1])
-			return self.s1.pop()
+				self.maximum.pop()
+			print(self.stack[-1])
+			return self.stack.pop()
 	
 	def max(self):
-		if len(self.s2) == 0:
+		if len(self.maximum) == 0:
 			print('EMPTY')
 		else:	# 최대값을 저장하는 스택의 top을 출력
-			print(self.s2[-1])
-			return self.s2[-1]
+			print(self.maximum[-1])
+			return self.maximum[-1]
 
 if __name__ == '__main__':
 	s = Stack()
